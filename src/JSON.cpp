@@ -15,7 +15,7 @@ void JSON::save(Persona *persona) {
 
     ofstream archivo;
 
-    try { archivo.open("ArchivoTexto.json", ios::binary); }
+    try { archivo.open("ArchivoJSON.json", ios::binary); }
 
     catch (ifstream::failure a) {
         cout << "no se pudo abrir el archivo";
