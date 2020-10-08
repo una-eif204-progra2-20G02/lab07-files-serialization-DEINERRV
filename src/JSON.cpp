@@ -26,3 +26,26 @@ void JSON::save(Persona *persona) {
 
     archivo.close();
 }
+
+
+void JSON::save(std::vector<Persona> personas) {
+    ofstream archivo;
+
+    try { archivo.open("ArchivoJSON.json", ios::binary); }
+
+    catch (ifstream::failure a) {
+        cout << "no se pudo abrir el archivo";
+        exit(1);
+    }
+
+    json Serializacion;
+
+    for(int i=0;i<personas.size();i++){
+        Serializacion["Personas"]+={{personas[i].getNombre(),personas[i].getEdad(),personas[i].getId()}};
+    }
+
+    string personaSerializada=Serializacion.dump(4);
+    archivo << personaSerializada << '\n';
+
+    archivo.close();
+}

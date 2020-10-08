@@ -5,6 +5,7 @@
 class JSON: public ISave {
 public:
     void save(Persona *) override;
+    void save(std::vector<Persona>)override;
 };
 
 
