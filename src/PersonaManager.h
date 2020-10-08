@@ -5,6 +5,7 @@
 class PersonaManager {
 public:
    void savePersona(ISave*,Persona*);
+   void savePersona(ISave*,std::vector<Persona>);
 };
 
 
