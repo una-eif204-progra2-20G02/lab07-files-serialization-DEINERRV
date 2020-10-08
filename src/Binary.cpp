@@ -16,3 +16,20 @@ void Binary::save(Persona * persona) {
 
     archivo.close();
 }
+
+void Binary::save(std::vector<Persona> personas) {
+    ofstream archivo;
+
+    try { archivo.open("ArchivoBinario.dat", ios::app | ios::binary);  }
+
+    catch (std::ifstream::failure a) {
+        cout << "no se pudo abrir el archivo";
+        exit(1);
+    }
+
+    for(Persona persona : personas) {
+        archivo.write((char *) &personas, sizeof(Persona));
+    }
+
+    archivo.close();
+}
