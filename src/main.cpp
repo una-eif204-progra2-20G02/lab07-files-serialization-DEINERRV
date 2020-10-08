@@ -21,7 +21,16 @@ int main(){
     Binary* binario=new Binary;
     JSON* json=new JSON;
 
+    manager.savePersona(binario,personas);
     manager.savePersona(json,personas);
+
+    vector<Persona> aux;
+    aux=manager.readPersona(binario);
+    for(Persona auxPersona : aux){
+        cout<<auxPersona.toString()<<endl;
+    }
+
+
 
     return 0;
 }
