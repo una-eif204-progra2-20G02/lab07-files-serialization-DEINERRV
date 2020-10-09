@@ -40,8 +40,8 @@ void JSON::save(std::vector<Persona> personas) {
 
     json Serializacion;
 
-    for(int i=0;i<personas.size();i++){
-        Serializacion["Personas"]+={{personas[i].getNombre(),personas[i].getEdad(),personas[i].getId()}};
+    for (int i=0;i<personas.size();i++){
+        Serializacion["Personas"] += {personas[i].getNombre(),personas[i].getEdad(),personas[i].getId()};
     }
 
     string personaSerializada=Serializacion.dump(4);
