@@ -20,6 +20,7 @@ public:
     void setId(int id);
 
     std::string getNombre() const;
+    void setNombre(std::string);
 
     std::string toString();
 };

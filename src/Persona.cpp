@@ -30,6 +30,10 @@ std::string Persona::getNombre() const {
     return nombre;
 }
 
+void Persona::setNombre(std::string nom) {
+    strcpy(nombre,nom.c_str());
+}
+
 std::string Persona::toString() {
     std::stringstream s;
 
