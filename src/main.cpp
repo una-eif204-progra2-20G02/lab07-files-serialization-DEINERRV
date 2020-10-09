@@ -24,6 +24,7 @@ int main(){
     manager.savePersona(binario,personas);
     manager.savePersona(json,personas);
 
+
     cout<<"BINARIO"<<endl;
 
     vector<Persona> aux;
@@ -33,6 +34,7 @@ int main(){
     for(Persona auxPersona : aux){
         cout<<auxPersona.toString()<<endl;
     }
+
 
     cout<<"\n\n\nJSON"<<endl;
 
