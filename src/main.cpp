@@ -24,12 +24,25 @@ int main(){
     manager.savePersona(binario,personas);
     manager.savePersona(json,personas);
 
+    cout<<"BINARIO"<<endl;
+
     vector<Persona> aux;
+
     aux=manager.readPersona(binario);
+
     for(Persona auxPersona : aux){
         cout<<auxPersona.toString()<<endl;
     }
 
+    cout<<"\n\n\nJSON"<<endl;
+
+    vector<Persona> aux2;
+
+    aux2=manager.readPersona(json);
+
+    for(Persona auxPersona : aux2){
+        cout<<auxPersona.toString()<<endl;
+    }
 
     return 0;
 }
