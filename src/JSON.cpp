@@ -5,6 +5,22 @@
 using namespace std;
 using json=nlohmann::json;
 
+void to_json(json &_json, const Persona &_person) {
+    _json = json{
+            {"id",   _person.getId()},
+            {"nombre", _person.getNombre()},
+            {"edad", _person.getEdad()},
+    };
+}
+
+void from_json(const json &_json, Persona &_person) {
+    _person.setId(_json.at("id").get<int>());
+    _person.setNombre(_json.at("nombre").get<std::string>());
+    _person.setEdad(_json.at("edad").get<int>());
+}
+
+
+
 void JSON::save(Persona *persona) {
     json Serializacion;
     Serializacion["nombre"]=persona->getNombre();
@@ -28,6 +44,7 @@ void JSON::save(Persona *persona) {
 }
 
 
+
 void JSON::save(std::vector<Persona> personas) {
     ofstream archivo;
 
@@ -38,17 +55,8 @@ void JSON::save(std::vector<Persona> personas) {
         exit(1);
     }
 
-    vector<json> Serializacion;
-
-    for (int i=0;i<personas.size();i++){
-
-        json PersonaJSON;
-        PersonaJSON["nombre"]=personas[i].getNombre();
-        PersonaJSON["edad"]=personas[i].getEdad();
-        PersonaJSON["id"]=personas[i].getId();
-
-        Serializacion.push_back(PersonaJSON);
-    }
+    json JsonData(personas);
+    string Serializacion=JsonData.dump();
 
     archivo << Serializacion << '\n';
 
@@ -56,18 +64,6 @@ void JSON::save(std::vector<Persona> personas) {
 }
 
 
-void from_json(const json& j, Persona& sb) {
-    sb.setNombre(j.at("nombre"));
-    sb.setEdad(j.at("edad"));
-    sb.setId(j.at("id"));
-}
-
-
-void from_json(const json& j, vector<Persona>& s) {
-    const json& sj = j;
-    s.resize(sj.size());
-    std::copy(sj.begin(), sj.end(), s.begin());
-}
 
 std::vector<Persona> JSON::read() {
 
@@ -75,13 +71,17 @@ std::vector<Persona> JSON::read() {
 
     try { archivo.open("ArchivoJSON.json", ios::binary); }
 
+
     catch (ifstream::failure a) {
         cout << "no se pudo abrir el archivo";
         exit(1);
     }
 
-    json j;
-    archivo>>j;
+
+    string datos;
+    archivo>>datos;
+
+    json j=json::parse(datos);
 
     archivo.close();
 
